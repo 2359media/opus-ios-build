@@ -1,5 +1,7 @@
 #!/bin/sh
 
+OPUS_VER=v1.0.2
+
 set -e
 
 source config.sh
@@ -10,7 +12,6 @@ DIST_DIR_BASE=${DIST_DIR_BASE:="$SCRIPT_DIR/dist"}
 git submodule update --init opus
 cd opus
 git checkout ${OPUS_VER}
-git pull 
 cd ..
 
 for ARCH in $ARCHS

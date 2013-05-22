@@ -69,39 +69,39 @@ do
     esac
 
     echo "Configuring opus for $ARCH..."
-	
-	./autogen.sh
-	
-	CFLAGS="-g -O2 -pipe -arch ${ARCH} \
-		-isysroot ${PLATFORM}/Developer/SDKs/${IOSSDK}.sdk \
-		-I${PLATFORM}/Developer/SDKs/${IOSSDK}.sdk/usr/include \
-		${EXTRA_CFLAGS}"
+
+    ./autogen.sh
+
+    CFLAGS="-g -O2 -pipe -arch ${ARCH} \
+        -isysroot ${PLATFORM}/Developer/SDKs/${IOSSDK}.sdk \
+        -I${PLATFORM}/Developer/SDKs/${IOSSDK}.sdk/usr/include \
+        ${EXTRA_CFLAGS}"
     LDFLAGS="-arch ${ARCH} \
-		-isysroot ${PLATFORM}/Developer/SDKs/${IOSSDK}.sdk \
-		-L${PLATFORM}/Developer/SDKs/${IOSSDK}.sdk/usr/lib"
-	
-	export CFLAGS
-	export LDFLAGS
-	
-    export CXXCPP="$PLATFORM/Developer/usr/bin/llvm-cpp"
+        -isysroot ${PLATFORM}/Developer/SDKs/${IOSSDK}.sdk \
+        -L${PLATFORM}/Developer/SDKs/${IOSSDK}.sdk/usr/lib"
+
+    export CFLAGS
+    export LDFLAGS
+
+    export CXXCPP="llvm-cpp-4.2"
     export CPP="$CXXCPP"
-    export CXX="$PLATFORM/Developer/usr/bin/llvm-g++"
-    export CC="$PLATFORM/Developer/usr/bin/llvm-gcc"
+    export CXX="$PLATFORM/Developer/usr/bin/g++"
+    export CC="$PLATFORM/Developer/usr/bin/gcc"
     export LD="$PLATFORM/Developer/usr/bin/ld"
     export AR="$PLATFORM/Developer/usr/bin/ar"
     export AS="$PLATFORM/Developer/usr/bin/ls"
     export NM="$PLATFORM/Developer/usr/bin/nm"
     export RANLIB="$PLATFORM/Developer/usr/bin/ranlib"
     export STRIP="$PLATFORM/Developer/usr/bin/strip"
-	
+
     ./configure \
-    	--prefix=$DIST_DIR \
-		--host=${ARCH}-apple-darwin \
-		--with-sysroot=${PLATFORM}/Developer/SDKs/${IOSSDK}.sdk \
-		--enable-static=yes \
-		--enable-shared=no \
-	    --disable-doc \
-		${EXTRA_FLAGS}
+        --prefix=$DIST_DIR \
+        --host=${ARCH}-apple-darwin \
+        --with-sysroot=${PLATFORM}/Developer/SDKs/${IOSSDK}.sdk \
+        --enable-static=yes \
+        --enable-shared=no \
+        --disable-doc \
+        ${EXTRA_FLAGS}
 
     echo "Installing opus for $ARCH..."
     make clean
